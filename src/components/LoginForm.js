@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Image, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button } from './common';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 import { LOGO } from '../images';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, registerUser } from '../actions';
 
 class LoginForm extends Component {
 	onEmailChange(text) {
@@ -15,7 +15,22 @@ class LoginForm extends Component {
 	}
 
 	onRegisterButtonPress() {
-		console.log(this.props.password);
+		this.props.registerUser({ email: this.props.email, password: this.props.password });
+	}
+
+	renderRegisterButtonOrSpinner() {
+		if (this.props.loading) {
+			return <Spinner />;
+		} 
+		return <Button onPress={this.onRegisterButtonPress.bind(this)}>Register</Button>;
+	}
+
+	renderErrorMessage() {
+		if (this.props.error) {
+			return (
+				<Text style={{ fontSize: 18, color: 'red' }}>{this.props.error}</Text>
+			);
+		}
 	}
 
 	render() {
@@ -42,7 +57,11 @@ class LoginForm extends Component {
 				</CardSection>
 
 				<CardSection style={{ borderBottomWidth: 0 }}>
-					<Button onPress={this.onRegisterButtonPress.bind(this)}>Register</Button>
+						{this.renderErrorMessage()}
+				</CardSection>
+
+				<CardSection style={{ borderBottomWidth: 0 }}>
+					{this.renderRegisterButtonOrSpinner()}
 				</CardSection>
 
 				<CardSection style={{ borderBottomWidth: 0, borderTopWidth: 0 }}>
@@ -69,8 +88,10 @@ const styles = {
 const mapStateToProps = state => {
 	return {
 		email: state.auth.email,
-		password: state.auth.password
+		password: state.auth.password,
+		loading: state.auth.loading,
+		error: state.auth.error
 	};
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, registerUser })(LoginForm);

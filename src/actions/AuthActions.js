@@ -1,4 +1,5 @@
 import firebase from '@firebase/app';
+import NavigationService from '../services/NavigationService';
 import { 
 	EMAIL_CHANGED, 
 	PASSWORD_CHANGED, 
@@ -28,7 +29,8 @@ export const registerUser = ({ email, password }) => {
 		dispatch({ type: REGISTER_USER }); // for loading spinner
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then(user => { 
-			dispatch({ type: REGISTER_USER_SUCCESS, payload: user }); 
+			dispatch({ type: REGISTER_USER_SUCCESS, payload: user });
+			NavigationService.navigate('Dashboard');
 		})
 		.catch((error) => {
 			const errorMessage = error.message;

@@ -5,20 +5,19 @@ import ReduxThunk from 'redux-thunk';
 import { 
 	createSwitchNavigator, 
 	createAppContainer, 
-	createDrawerNavigator,
-	createBottomTabNavigator,
-	createStackNavigator
+	createBottomTabNavigator
 } from 'react-navigation';
-import { Icon } from 'native-base';
+import { Root } from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import firebase from '@firebase/app';
 import reducers from './reducers';
-import { 
-	WelcomeScreen, 
-	DashboardScreen, 
-	Feed, 
+import WelcomeScreen from './screens/WelcomeScreen';
+import {   
+	News, 
 	Profile, 
 	Settings 
 } from './screens';
+import NavigationService from './services/NavigationService';
 
 class App extends Component {
 	componentDidMount() {
@@ -37,55 +36,41 @@ class App extends Component {
 		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 		return (
 			<Provider store={store}>
-				<AppContainer />
+				<Root>
+					<AppContainer 
+						ref={navigatorRef => {
+							NavigationService.setTopLevelNavigator(navigatorRef);
+					}}
+					/>
+				</Root>
 			</Provider>
 		);
 	}
 }
 
 const DashboardTabNavigator = createBottomTabNavigator({
-	Feed,
+	News,
 	Profile,
 	Settings
 },
 {
-	navigationOptions: ({ navigation }) => {
-		const { routeName } = navigation.state.routes[navigation.state.index];
-		return {
-			headerTitle: routeName
-		};
-	}
+	defaultNavigationOptions: ({ navigation }) => ({
+		tabBarIcon: ({ focused, tintColor }) => {
+			const { routeName } = navigation.state;
+			const IconComponent = Ionicons;
+			let iconName;
+			if (routeName === 'News') {
+				iconName = `ios-star${focused ? '' : '-outline'}`;
+			}
+			return <IconComponent name={iconName} size={25} color={tintColor} />;
+		}
+	})
 }
 );
-
-const DashboardStackNavigator = createStackNavigator({
-	DashboardTabNavigator: DashboardTabNavigator
-},
-{
-	defaultNavigationOptions: ({ navigation }) => {
-		return {
-			headerLeft: (
-				<Icon 
-					android="md-menu"
-					ios='ios-menu'
-					style={{ paddingLeft: 10 }}
-					onPress={() => navigation.openDrawer()}
-				/>
-			)
-		};
-	}
-}
-);
-
-const AppDrawerNavigator = createDrawerNavigator({
-	Dashboard: {
-		screen: DashboardStackNavigator
-	}
-});
 
 const AppSwitchNavigator = createSwitchNavigator({
 	Welcome: { screen: WelcomeScreen },
-	Dashboard: { screen: AppDrawerNavigator }
+	Dashboard: { screen: DashboardTabNavigator }
 });
 
 const AppContainer = createAppContainer(AppSwitchNavigator);

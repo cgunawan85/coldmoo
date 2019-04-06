@@ -12,8 +12,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import firebase from '@firebase/app';
 import reducers from './reducers';
 import WelcomeScreen from './screens/WelcomeScreen';
-import {   
-	News, 
+import News from './screens/News';
+import {
 	Profile, 
 	Settings 
 } from './screens';
@@ -61,7 +61,7 @@ const DashboardTabNavigator = createBottomTabNavigator({
 			let iconName;
 			if (routeName === 'News') {
 				iconName = `ios-star${focused ? '' : '-outline'}`;
-			}
+			} // add more icons here
 			return <IconComponent name={iconName} size={25} color={tintColor} />;
 		}
 	})

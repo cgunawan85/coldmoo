@@ -11,8 +11,9 @@ import { Root } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import firebase from '@firebase/app';
 import reducers from './reducers';
-import WelcomeScreen from './screens/WelcomeScreen';
+import Login from './screens/Login';
 import News from './screens/News';
+import AuthLoading from './screens/AuthLoading';
 import {
 	Profile, 
 	Settings 
@@ -20,18 +21,6 @@ import {
 import NavigationService from './services/NavigationService';
 
 class App extends Component {
-	componentDidMount() {
-		const config = {
-			apiKey: 'AIzaSyAKxev7irkEQqBtFG2n2asiJmENNRr-WvQ',
-			authDomain: 'coldmoo-f07a2.firebaseapp.com',
-			databaseURL: 'https://coldmoo-f07a2.firebaseio.com',
-			projectId: 'coldmoo-f07a2',
-			storageBucket: 'coldmoo-f07a2.appspot.com',
-			messagingSenderId: '78980425142'
-		};
-		firebase.initializeApp(config);
-	}
-
 	render() {
 		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 		return (
@@ -61,17 +50,27 @@ const DashboardTabNavigator = createBottomTabNavigator({
 			let iconName;
 			if (routeName === 'News') {
 				iconName = `ios-star${focused ? '' : '-outline'}`;
-			} // add more icons here
+			} else if (routeName === 'Profile') {
+				iconName = `ios-star${focused ? '' : '-outline'}`;
+			} else if (routeName === 'Settings') {
+				iconName = `ios-star${focused ? '' : '-outline'}`;
+			}
 			return <IconComponent name={iconName} size={25} color={tintColor} />;
 		}
 	})
 }
 );
 
-const AppSwitchNavigator = createSwitchNavigator({
-	Welcome: { screen: WelcomeScreen },
+const AppSwitchNavigator = createSwitchNavigator(
+{
+	AuthLoading: { screen: AuthLoading },
+	Login: { screen: Login },
 	Dashboard: { screen: DashboardTabNavigator }
-});
+},
+{
+	initialRouteName: 'AuthLoading'
+}
+);
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
 

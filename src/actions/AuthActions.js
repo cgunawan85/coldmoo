@@ -11,7 +11,6 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
 	LOGOUT_SUCCESS,
-	RESET_ERROR
 } from './types';
 
 require('firebase/auth');

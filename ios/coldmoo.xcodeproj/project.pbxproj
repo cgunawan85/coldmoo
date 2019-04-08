@@ -61,6 +61,7 @@
 		D839104690744E77A9BEFC34 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C6D7293358842539FDFD6CB /* Zocial.ttf */; };
 		923FBB1CD0C64B8785EC4B2A /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A65AFB0ECAC84BBEA18FC0AC /* libRNVectorIcons.a */; };
 		30F3F3AB902C4E15A50DAAD1 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD18365CB8B8451D89E9959F /* libRNVectorIcons-tvOS.a */; };
+		F3C1B9E5C7B3461BB9993850 /* LuckiestGuy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5435DCFF80A24635A9086057 /* LuckiestGuy-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +393,7 @@
 		0F087FD4446A496295CEB92B /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		A65AFB0ECAC84BBEA18FC0AC /* libRNVectorIcons.a */ = {isa = PBXFileReference; name = "libRNVectorIcons.a"; path = "libRNVectorIcons.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BD18365CB8B8451D89E9959F /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; name = "libRNVectorIcons-tvOS.a"; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5435DCFF80A24635A9086057 /* LuckiestGuy-Regular.ttf */ = {isa = PBXFileReference; name = "LuckiestGuy-Regular.ttf"; path = "../src/assets/fonts/LuckiestGuy-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,6 +686,7 @@
 				4CCA73C45E894416A694A655 /* rubicon-icon-font.ttf */,
 				95AC32D622CA4D68A2BC72F6 /* SimpleLineIcons.ttf */,
 				0C6D7293358842539FDFD6CB /* Zocial.ttf */,
+				5435DCFF80A24635A9086057 /* LuckiestGuy-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1153,6 +1156,7 @@
 				9EB7E9F156734D1BABE0683D /* rubicon-icon-font.ttf in Resources */,
 				840D506BDFFF4F54BA51965D /* SimpleLineIcons.ttf in Resources */,
 				D839104690744E77A9BEFC34 /* Zocial.ttf in Resources */,
+				F3C1B9E5C7B3461BB9993850 /* LuckiestGuy-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

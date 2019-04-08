@@ -5,13 +5,15 @@ import ReduxThunk from 'redux-thunk';
 import { 
 	createSwitchNavigator, 
 	createAppContainer, 
-	createBottomTabNavigator
+	createBottomTabNavigator,
+	createStackNavigator
 } from 'react-navigation';
 import { Root } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import firebase from '@firebase/app';
 import reducers from './reducers';
 import Login from './screens/Login';
+import Register from './screens/Register';
 import News from './screens/News';
 import AuthLoading from './screens/AuthLoading';
 import {
@@ -61,10 +63,12 @@ const DashboardTabNavigator = createBottomTabNavigator({
 }
 );
 
+const AuthStack = createStackNavigator({ Login: Login, Register: Register });
+
 const AppSwitchNavigator = createSwitchNavigator(
 {
 	AuthLoading: { screen: AuthLoading },
-	Login: { screen: Login },
+	Auth: { screen: AuthStack },
 	Dashboard: { screen: DashboardTabNavigator }
 },
 {
